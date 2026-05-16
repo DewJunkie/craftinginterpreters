@@ -9,5 +9,13 @@ pkgs.mkShell {
   buildInputs = [
     pkgs.dart
     pkgs.zulu
+    pkgs.gcc
+    pkgs.gnumake
+    pkgs.git
+    pkgs.glibcLocales
   ];
+
+  shellHook = ''
+    export LANG=en_US.UTF-8
+  '';
 }
