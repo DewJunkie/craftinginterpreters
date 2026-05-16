@@ -202,8 +202,10 @@ DateTime? _mostRecentlyModified(List<String> globs) {
   DateTime? latest;
   for (var glob in globs) {
     for (var entry in Glob(glob).listSync()) {
-      var modified = File(entry.path).lastModifiedSync();
-      if (latest == null || modified.isAfter(latest)) latest = modified;
+      if (entry case File file) {
+        var modified = file.lastModifiedSync();
+        if (latest == null || modified.isAfter(latest)) latest = modified;
+      }
     }
   }
 
