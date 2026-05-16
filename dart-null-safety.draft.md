@@ -25,14 +25,14 @@ This update involves:
   **Then** there are no differences in the generated files (ignoring trivial whitespace or timestamp-only changes)  
 
   **Examples:**
-  | target        | output-dir      |
-  | ------        | ------          |
-  | book          | site/           |
-  | clox          | clox            |
-  | jlox          | jlox            |
-  | c_chapters    | build/          |
-  | java_chapters | build/gen/      |
-  | (default)     | site/, clox, jlox |
+  | target        | output-dir               |
+  | ------        | ------                   |
+  | book          | site/                    |
+  | clox          | clox                     |
+  | jlox          | build/java/              |
+  | c_chapters    | build/, gen/             |
+  | java_chapters | build/gen/, gen/         |
+  | (default)     | site/, clox, build/java/ |
 
 **Scenario:** All existing Lox tests pass under the new Dart runner  
   **Given** the author is in the feature branch worktree  
