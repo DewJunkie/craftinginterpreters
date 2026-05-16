@@ -1,8 +1,8 @@
-# Book restricts to a prior version of dart
-# how I found previous version of dard https://www.nixhub.io/packages/dart
+# Project updated to Dart 3 with Sound Null Safety.
+# Using a recent nixpkgs commit for a stable Dart 3 experience.
 { pkgs ? import (fetchTarball {
-  url = "https://github.com/NixOS/nixpkgs/archive/e040aab15638aaf8d0786894851a2b1ca09a7baf.tar.gz";
-  sha256 = "01zbkazzfnp1lq7g5zk9s1xh53jwsny9aabng879n8csh1i8qbmk";
+  url = "https://github.com/NixOS/nixpkgs/archive/205fd4226592cc83fd4c0885a3e4c9c400efabb5.tar.gz";
+  sha256 = "1f5d2g1p6nfwycpmrnnmc2xmcszp804adp16knjvdkj8nz36y1fg";
 }) {} }:
 
 pkgs.mkShell {

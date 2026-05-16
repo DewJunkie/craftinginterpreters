@@ -15,10 +15,10 @@ class Mustache {
 
   final Map<String, Template> _templates = {};
 
-  Mustache([String templateDirectory])
+  Mustache([String? templateDirectory])
       : _templateDirectory = templateDirectory ?? p.join("asset", "mustache");
 
-  String render(Book book, Page page, String body, {String template}) {
+  String render(Book book, Page page, String body, {String? template}) {
     var part = page.part?.title;
 
     var up = "Table of Contents";
@@ -30,14 +30,14 @@ class Mustache {
 
     var previousPage = book.adjacentPage(page, -1);
     var nextPage = book.adjacentPage(page, 1);
-    String nextType;
+    String? nextType;
     if (nextPage != null && nextPage.isChapter) {
       nextType = "Chapter";
     } else if (nextPage != null && nextPage.isPart) {
       nextType = "Part";
     }
 
-    List<Map<String, dynamic>> chapters;
+    List<Map<String, dynamic>>? chapters;
     if (page.isPart) {
       chapters = _makeChapterList(page);
     }

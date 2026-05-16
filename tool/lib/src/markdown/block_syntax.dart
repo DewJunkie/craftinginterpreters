@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:markdown/markdown.dart';
 
 import '../format.dart';
@@ -20,7 +22,13 @@ class BookHeaderSyntax extends BlockSyntax {
   BookHeaderSyntax(this._page, this._format);
 
   Node parse(BlockParser parser) {
-    var header = _page.headers[parser.current];
+    var header = _page.headers[parser.current.content];
+    if (header == null) {
+      print("Could not find header for line: '${parser.current.content}'");
+      print("Available headers: ${_page.headers.keys.join(', ')}");
+      exit(1);
+    }
+
     parser.advance();
 
     if (_format.isPrint) {
