@@ -380,7 +380,7 @@ class _Context {
   }
 
   /// Whether [parent] has [name].
-  bool isIn(String name) => parent != null && parent!.has(name);
+  bool isIn(String name) => parent?.has(name) ?? false;
 
   /// How many levels of list nesting this context contains.
   int get listDepth {

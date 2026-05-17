@@ -31,9 +31,9 @@ class Mustache {
     var previousPage = book.adjacentPage(page, -1);
     var nextPage = book.adjacentPage(page, 1);
     String? nextType;
-    if (nextPage != null && nextPage.isChapter) {
+    if (nextPage?.isChapter ?? false) {
       nextType = "Chapter";
-    } else if (nextPage != null && nextPage.isPart) {
+    } else if (nextPage?.isPart ?? false) {
       nextType = "Part";
     }
 
