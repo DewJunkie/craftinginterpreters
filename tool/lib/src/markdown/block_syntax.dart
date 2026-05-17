@@ -24,8 +24,8 @@ class BookHeaderSyntax extends BlockSyntax {
   Node parse(BlockParser parser) {
     var header = _page.headers[parser.current.content];
     if (header == null) {
-      print("Could not find header for line: '${parser.current.content}'");
-      print("Available headers: ${_page.headers.keys.join(', ')}");
+      stderr.writeln("[ERR] Could not find header for line: '${parser.current.content}'");
+      stderr.writeln("[ERR] Available headers: ${_page.headers.keys.join(', ')}");
       exit(1);
     }
 
