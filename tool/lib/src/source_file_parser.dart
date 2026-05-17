@@ -210,10 +210,12 @@ class SourceFileParser {
   bool _updateState(String line) {
     var match = _blockPattern.firstMatch(line);
     if (match != null) {
+      var startChapterName = match[1] ?? (throw ArgumentError('Start chapter missing in match'));
+      var endChapterName = match[3] ?? (throw ArgumentError('End chapter missing in match'));
       _push(
-          startChapter: _book.findChapter(match[1] ?? (throw ArgumentError('Start chapter missing in match'))),
+          startChapter: _book.findChapter(startChapterName),
           startName: match[2],
-          endChapter: _book.findChapter(match[3] ?? (throw ArgumentError('End chapter missing in match'))),
+          endChapter: _book.findChapter(endChapterName),
           endName: match[4]);
       _locationBeforeBlock = _location;
       return true;
@@ -257,7 +259,8 @@ class SourceFileParser {
 
     match = _beginChapterPattern.firstMatch(line);
     if (match != null) {
-      var chapter = _book.findChapter(match[1] ?? (throw ArgumentError('Chapter missing in match')));
+      var chapterName = match[1] ?? (throw ArgumentError('Chapter missing in match'));
+      var chapter = _book.findChapter(chapterName);
       var name = match[2];
 
 //        if state.start != None:

@@ -42,12 +42,17 @@ class HighlightedCodeBlockSyntax extends BlockSyntax {
 
   Node parse(BlockParser parser) {
     // Get the syntax identifier, if there is one.
-    var match = pattern.firstMatch(parser.current.content) ?? (throw StateError('Match missing for pattern at current line'));
+    var match = pattern.firstMatch(parser.current.content);
+    if (match == null) throw StateError('Match missing for pattern at current line');
+
     var indent = (match[1] ?? (throw ArgumentError('Indent missing in match'))).length;
     var language = match[2] ?? (throw ArgumentError('Language missing in match'));
 
     var childLines = parseChildLines(parser);
-    var childStrings = childLines.map((line) => (line ?? (throw StateError('Line is null'))).content).toList();
+    var childStrings = childLines.map((line) {
+      if (line == null) throw StateError('Line is null');
+      return line.content;
+    }).toList();
 
     String code;
     if (language == "text") {
@@ -120,7 +125,9 @@ class CodeTagBlockSyntax extends BlockSyntax {
       pattern.firstMatch(parser.current.content) != null;
 
   Node parse(BlockParser parser) {
-    var match = pattern.firstMatch(parser.current.content) ?? (throw StateError('Match missing for pattern at current line'));
+    var match = pattern.firstMatch(parser.current.content);
+    if (match == null) throw StateError('Match missing for pattern at current line');
+
     var name = match[1] ?? (throw ArgumentError('Name missing in match'));
     parser.advance();
 

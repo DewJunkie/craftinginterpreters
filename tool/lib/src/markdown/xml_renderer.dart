@@ -118,7 +118,9 @@ class XmlRenderer implements NodeVisitor {
 
     // Convert image tags to just their paths.
     if (text.startsWith("<img")) {
-      var imagePath = (_imagePathPattern.firstMatch(text) ?? (throw StateError('Match missing for image pattern')))[1] ?? (throw ArgumentError('Image path missing in match'));
+      var match = _imagePathPattern.firstMatch(text);
+      if (match == null) throw StateError('Match missing for image pattern');
+      var imagePath = match[1] ?? (throw ArgumentError('Image path missing in match'));
 
       // The GC chapter has a couple of tiny inline images that happen to be in
       // an unordered list. Don't create paragraphs for them.
@@ -325,8 +327,9 @@ class XmlRenderer implements NodeVisitor {
   }
 
   void _pop() {
-    if (_context.parent != null) {
-      _context = _context.parent ?? (throw StateError('Context parent is null'));
+    var parent = _context.parent;
+    if (parent != null) {
+      _context = parent;
     } else {
       print("Warning: Popping main context.");
     }

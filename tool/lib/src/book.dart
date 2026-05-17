@@ -128,9 +128,7 @@ class Book {
           snippet.addLine(lineIndex, line);
 
           if (line.end != null) {
-            var endSnippet = _snippets.putIfAbsent(
-                line.end ?? (throw StateError('Line end is null')),
-                () => Snippet(sourceFile, line.end ?? (throw StateError('Line end is null'))));
+            var endSnippet = _snippets.putIfAbsent(line.end!, () => Snippet(sourceFile, line.end!));
             endSnippet.removeLine(lineIndex, line);
           }
 
@@ -221,7 +219,7 @@ class SourceLine {
     if (tag < start) return false;
 
     // If we are past the snippet where it is removed.
-    if (end != null && tag >= (end ?? (throw StateError('End tag is null')))) return false;
+    if (end != null && tag >= end!) return false;
 
     return true;
   }
