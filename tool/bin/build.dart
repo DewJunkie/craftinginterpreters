@@ -172,7 +172,7 @@ Future<void> _runServer() async {
     try {
       var contents = await File(p.join("site", filePath)).readAsBytes();
       return shelf.Response.ok(contents, headers: {
-        HttpHeaders.contentTypeHeader: mimeFromExtension(extension)!
+        HttpHeaders.contentTypeHeader: mimeFromExtension(extension) ?? (throw ArgumentError('No mime type exists for $extension'))
       });
     } on FileSystemException {
       print(

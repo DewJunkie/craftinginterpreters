@@ -111,7 +111,7 @@ void _runSuites(List<String> names) {
 }
 
 bool _runSuite(String name) {
-  _suite = _allSuites[name]!;
+  _suite = _allSuites[name] ?? (throw ArgumentError('No suite named "$name"'));
 
   _passed = 0;
   _failed = 0;
@@ -145,7 +145,7 @@ void _runTest(String path) {
   // Check if we are just running a subset of the tests.
   if (_filterPath != null) {
     var thisTest = p.posix.relative(path, from: "test");
-    if (!thisTest.startsWith(_filterPath!)) return;
+    if (!thisTest.startsWith(_filterPath ?? (throw StateError('_filterPath is null')))) return;
   }
   // Update the status line.
   var grayPath = term.gray("($path)");
@@ -237,7 +237,7 @@ class Test {
 
       match = _expectedOutputPattern.firstMatch(line);
       if (match != null) {
-        _expectedOutput.add(ExpectedOutput(lineNum, match[1]!));
+        _expectedOutput.add(ExpectedOutput(lineNum, match[1] ?? (throw ArgumentError('Expected output missing for match at line $lineNum'))));
         _expectations++;
         continue;
       }
@@ -273,7 +273,7 @@ class Test {
       match = _expectedRuntimeErrorPattern.firstMatch(line);
       if (match != null) {
         _runtimeErrorLine = lineNum;
-        _expectedRuntimeError = match[1]!;
+        _expectedRuntimeError = match[1] ?? (throw ArgumentError('Expected runtime error missing for match at line $lineNum'));
         // If we expect a runtime error, it should exit with EX_SOFTWARE.
         _expectedExitCode = 70;
         _expectations++;
@@ -337,7 +337,7 @@ class Test {
     if (match == null) {
       fail("Expected stack trace and got:", stackLines);
     } else {
-      var stackLine = int.parse(match[1]!);
+      var stackLine = int.parse(match[1] ?? (throw ArgumentError('Stack line missing in match')));
       if (stackLine != _runtimeErrorLine) {
         fail("Expected runtime error on line $_runtimeErrorLine "
             "but was on line $stackLine.");

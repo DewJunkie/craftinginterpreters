@@ -107,7 +107,7 @@ class Highlighter {
   }
 
   void writeToken(String type, [String? text]) {
-    text ??= scanner.lastMatch![0]!;
+    text ??= (scanner.lastMatch ?? (throw StateError('Last match missing')))[0] ?? (throw ArgumentError('First group missing in last match'));
 
     if (_format.isPrint) {
       // Only highlight keywords and comments in XML.

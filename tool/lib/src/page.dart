@@ -48,8 +48,8 @@ class Page {
   /// of the main chapter pages.
   String? get language {
     if (isPart) return null;
-    if (part!.title == "A Tree-Walk Interpreter") return "java";
-    if (part!.title == "A Bytecode Virtual Machine") return "c";
+    if ((part ?? (throw StateError('Part is null'))).title == "A Tree-Walk Interpreter") return "java";
+    if ((part ?? (throw StateError('Part is null'))).title == "A Bytecode Virtual Machine") return "c";
     return null;
   }
 

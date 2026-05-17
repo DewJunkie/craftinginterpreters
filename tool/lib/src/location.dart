@@ -51,7 +51,7 @@ class Location {
 
     // Note: The order of these is highly significant.
     if (kind == "class" && parent?.kind == "class") {
-      return "nest inside class <em>${parent!.name}</em>";
+      return "nest inside class <em>${(parent ?? (throw StateError('Parent is null'))).name}</em>";
     }
 
     if (isFunction && preceding == this) {
@@ -110,7 +110,7 @@ class Location {
 
     // Note: The order of these is highly significant.
     if (kind == "class" && parent?.kind == "class") {
-      return "nest inside class <location-type>${parent!.name}</location-type>";
+      return "nest inside class <location-type>${(parent ?? (throw StateError('Parent is null'))).name}</location-type>";
     }
 
     if (isFunction && preceding == this) {

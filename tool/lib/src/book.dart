@@ -90,7 +90,7 @@ class Book {
         parts.add(partPage);
       }
 
-      for (var chapter in _tableOfContents[part]!) {
+      for (var chapter in (_tableOfContents[part] ?? (throw ArgumentError('No table of contents for part "$part"')))) {
         var chapterNumber = "";
         if (inMatter) {
           // Front- and backmatter chapters are specially numbered.
@@ -129,7 +129,8 @@ class Book {
 
           if (line.end != null) {
             var endSnippet = _snippets.putIfAbsent(
-                line.end!, () => Snippet(sourceFile, line.end!));
+                line.end ?? (throw StateError('Line end is null')),
+                () => Snippet(sourceFile, line.end ?? (throw StateError('Line end is null'))));
             endSnippet.removeLine(lineIndex, line);
           }
 
@@ -220,7 +221,7 @@ class SourceLine {
     if (tag < start) return false;
 
     // If we are past the snippet where it is removed.
-    if (end != null && tag >= end!) return false;
+    if (end != null && tag >= (end ?? (throw StateError('End tag is null')))) return false;
 
     return true;
   }
