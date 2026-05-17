@@ -1,7 +1,7 @@
 # Using the NixOS 25.11 stable release for a consistent Dart 3 environment.
 { pkgs ? import (fetchTarball {
   url = "https://github.com/NixOS/nixpkgs/archive/nixos-25.11.tar.gz";
-  sha256 = "1zn1lsafn62sz6azx6j735fh4vwwghj8cc9x91g5sx2nrg23ap9k";
+  sha256 = "1hp1ddh41wrqxgrnfa79nsv7gzlbpwcqsijx7jw5b33wvk5ah5gb";
 }) {} }:
 
 pkgs.mkShell {
