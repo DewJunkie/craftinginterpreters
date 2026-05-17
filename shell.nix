@@ -1,8 +1,7 @@
-# Project updated to Dart 3 with Sound Null Safety.
-# Using a recent nixpkgs commit for a stable Dart 3 experience.
+# Using the NixOS 25.11 stable release for a consistent Dart 3 environment.
 { pkgs ? import (fetchTarball {
-  url = "https://github.com/NixOS/nixpkgs/archive/205fd4226592cc83fd4c0885a3e4c9c400efabb5.tar.gz";
-  sha256 = "1f5d2g1p6nfwycpmrnnmc2xmcszp804adp16knjvdkj8nz36y1fg";
+  url = "https://github.com/NixOS/nixpkgs/archive/nixos-25.11.tar.gz";
+  sha256 = "1zn1lsafn62sz6azx6j735fh4vwwghj8cc9x91g5sx2nrg23ap9k";
 }) {} }:
 
 pkgs.mkShell {
